@@ -83,13 +83,13 @@ module.exports = yeoman.generators.Base.extend({
                 x = c * (-1);
                 // increment y to start new row above the last
                 y++;
-                // increment z to give the stadium effect
-                z++;
+                // decrement z to give the stadium effect
+                z--;
               }
 
             }
           }, assetLinks);
-          
+
           links = assetLinks;
           cb(null); // shoud be done();
         }
