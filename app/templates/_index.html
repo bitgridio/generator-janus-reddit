@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <%= description %>
+    <FireBoxRoom>
+      <Room use_local_asset="room_plane">
+        <% _.forEach(assetLinks, function (link) {
+          %><Link id="<%= link.id %>" pos="<%= link.pos.x %> <%= link.pos.y %> <%= link.pos.z %>" xdir="<%= link.xdir %>" ydir="<%= link.ydir %>" zdir="<%= link.zdir %>" scale="1.8 2.5 1" src="<%= link.url %>" />
+        <% }); %>
+      </Room>
+    </FireBoxRoom>
+  </body>
+</html>
