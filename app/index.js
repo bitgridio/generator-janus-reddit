@@ -54,14 +54,16 @@ module.exports = yeoman.generators.Base.extend({
 
         constructLinkProperties: function (posts, cb) {
           var assetLinks = [];
-        var c = 5,
-          x = c * (-1),
-          y = 1,
-          z = 1;
+          var portalWidth = 2, // really 1.8 but rounding up
+            portalHeight = 2.5,
+            c = 5,
+            x = c * (portalWidth) * (-1), // since our portals are 1.8 in width, let's multiply by that
+            y = 1,
+            z = 1;
 
           // pass assetLinks as the context which becomes 'this' inside the forEach();
           posts.data.children.forEach(function (val, idx, arr) {
-            console.log(val);
+
             // make sure current post is a link. links don't have selftext_html
             if (val.data.selftext_html == null) {
 
@@ -69,6 +71,7 @@ module.exports = yeoman.generators.Base.extend({
               this.push({
                 'id': val.data.id,
                 'url': val.data.url,
+                'title': val.data.title.replace(/["']/g, ""), // remove quotes
                 'pos': {'x' : x, 'y' : y, 'z' : z},
                 'xdir': 'xdir',
                 'ydir': 'ydir',
@@ -76,13 +79,13 @@ module.exports = yeoman.generators.Base.extend({
               });
 
               // change xyz
-              x++;
+              x = x + portalWidth + 1; // again, our portals are 1.8 in width so add that to our next pos.x
 
-              if (x === c+1) {
+              if (x > c * (portalWidth)) {
                 // reset x to c
-                x = c * (-1);
+                x = c * (portalWidth) * (-1);
                 // increment y to start new row above the last
-                y++;
+                y = y + portalHeight;
                 // decrement z to give the stadium effect
                 z--;
               }
