@@ -33,6 +33,7 @@ Finally, initiate the generator:
 ```bash
 yo janus-reddit
 ```
+You can see a sample of what this generates in [the example repository for this module](https://github.com/sirkitree/test-janus-reddit).
 
 ### Getting To Know Yeoman
 
