@@ -32,12 +32,24 @@ module.exports = yeoman.generators.Base.extend({
       name: 'limit',
       message: 'How many links would you like to retrieve?',
       default: 10
+    }, {
+      type: 'input',
+      name: 'docTitle',
+      message: 'HTML title for this page:',
+      default: 'JanusReddit'
+    }, {
+      type: 'input',
+      name: 'docHTML',
+      message: 'HTML or text description for this page:',
+      default: '<p>Generated with <a href="https://github.com/sirkitree/generator-janus-reddit">Janus Reddit room generator</a>.'
     }];
 
     // Actual work done here.
     this.prompt(prompts, function (props) {
       this.subreddit = props.subreddit;
       this.limit = props.limit;
+      this.docTitle = props.docTitle;
+      this.docHTML = props.docHTML;
       var linkPopulation = {
         callRedditAPI: function (subreddit, limit, cb) {
           // Use rereddit to grab the posts
@@ -108,8 +120,8 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('_index.html'),
         this.destinationPath('public/index.html'),
         {
-          title: 'Reddit Janus',
-          description: 'test description',
+          title: this.docTitle,
+          description: this.docHTML,
           assetLinks: links,
           subreddit: this.subreddit
         }
